@@ -44,7 +44,7 @@
     transition: transform 0.2s linear;
 }
   
-/*  target the elemenent after the label*/
+/*  target the elements after the label*/
 .checkbox:checked + .label .ball{
     transform: translateX(16px);
 }
