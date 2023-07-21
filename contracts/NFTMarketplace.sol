@@ -5,9 +5,9 @@ import "@openzeppelin/contracts/utils/Counters.sol";
 import "@openzeppelin/contracts/token/ERC721/extensions/ERC721URIStorage.sol";
 import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
 
-import "../node_modules/hardhat/console.sol";
+import "hardhat/console.sol";
 
-abstract contract NFTMarketplace is ERC721URIStorage {
+contract NFTMarketplace is ERC721URIStorage {
     using Counters for Counters.Counter;
 
     Counters.Counter private _tokenIds;
@@ -153,6 +153,7 @@ abstract contract NFTMarketplace is ERC721URIStorage {
                 currentIndex += 1;
             }
         }
+        return items;
     }
 
     function fetchItemsListed() public view returns (MarketItem[] memory) {
@@ -177,5 +178,6 @@ abstract contract NFTMarketplace is ERC721URIStorage {
                 currentIndex += 1;
             }
         }
+        return items;
     }
 }
