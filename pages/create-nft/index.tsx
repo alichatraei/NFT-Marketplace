@@ -1,19 +1,24 @@
-import { ChangeEvent, useCallback, useMemo, useState } from "react";
+import { ChangeEvent, useCallback, useContext, useMemo, useState } from "react";
 import { useRouter } from "next/router";
 import { useDropzone } from "react-dropzone";
 import Image from "next/image";
 import { useTheme } from "next-themes";
 import { Button, Input } from "@/components/index";
 import images from "@/assets/index";
+import { NFTContext } from "context/NFTContext";
 
 type TFormInfo = { name: string; description: string; price: string };
 
 const CreatedNFT = () => {
-  const [fileURL, setFileURL] = useState<string | null>(null);
+  const [fileURL, setFileURL] = useState<{ url: string } | null>(null);
   const [formInfo, setFormInfo] = useState<TFormInfo | null>(null);
+  const { uploadToIPFS } = useContext(NFTContext);
   const { theme } = useTheme();
-  const onDrop = useCallback(() => {
+  const onDrop = useCallback(async (acceptedFile: File[]) => {
     // upload image to blockchain ipfs
+    const result = await uploadToIPFS(acceptedFile[0]);
+    console.log(result);
+    setFileURL(result as any);
   }, []);
   const {
     getRootProps,
@@ -68,7 +73,12 @@ const CreatedNFT = () => {
             {fileURL && (
               <aside>
                 <div>
-                  <img src={fileURL} alt="asset_file" />
+                  <img
+                    src={`https://achkit.infura-ipfs.io/${fileURL}`}
+                    alt="asset_file"
+                    width={200}
+                    height={200}
+                  />
                 </div>
               </aside>
             )}
