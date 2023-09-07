@@ -19,7 +19,7 @@ interface NFTCardProps {
 }
 
 const NFTCard = ({ nft }: NFTCardProps) => {
-  const context= useContext<INFTContext>(NFTContext)
+  const context = useContext<INFTContext>(NFTContext);
   return (
     <Link
       href={{
@@ -30,7 +30,7 @@ const NFTCard = ({ nft }: NFTCardProps) => {
       <div className="flex-1 min-w-215 max-w-max xs:max-w-noen sm:w-full sm:min-w-155 minmd:min-w-256 minlg:min-w-327 dark:bg-nft-black-3 bg-white rounded-2xl p-4 m-4 minlg:m-8 sm:m-2 cursor-pointer shadow-md">
         <div className="relative w-full h-52 sm:h-36 xs:h-56  mind:h-60 minlg:h-300 rounded-2xl overflow-hidden">
           <Image
-            src={nft.image || images[`nft${nft.id}`]}
+            src={nft.image || images[`nft${nft.id}` as keyof typeof images]}
             layout="fill"
             objectFit="cover"
             alt={`nft-${nft.id}`}
