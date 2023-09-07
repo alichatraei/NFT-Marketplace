@@ -62,7 +62,7 @@ const Home = () => {
               <CreatorCard
                 key={`creator-${index}`}
                 rank={item}
-                creatorImage={images[`creator${item}`]}
+                creatorImage={images[`creator${item}` as keyof typeof images]}
                 creatorName={`0x${makeId(3)}...${makeId(4)}`}
                 creatorEths={10 - item * 0.5}
               />
