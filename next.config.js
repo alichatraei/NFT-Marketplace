@@ -14,4 +14,7 @@ module.exports = {
   assetPrefix: assetPrefix,
   basePath: basePath,
   reactStrictMode: true,
+  images: {
+    unoptimized: true,
+  },
 };
