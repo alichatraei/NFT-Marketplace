@@ -15,6 +15,7 @@ module.exports = {
   basePath: basePath,
   reactStrictMode: true,
   images: {
-    unoptimized: true,
+    loader: "akamai",
+    path: "",
   },
 };
