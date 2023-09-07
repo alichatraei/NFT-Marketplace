@@ -10,14 +10,18 @@ import { NFTContext } from "context/NFTContext";
 type TFormInfo = { name: string; description: string; price: string };
 
 const CreatedNFT = () => {
-  const [fileURL, setFileURL] = useState<{ url: string } | null>(null);
-  const [formInfo, setFormInfo] = useState<TFormInfo | null>(null);
-  const { uploadToIPFS } = useContext(NFTContext);
+  const [fileURL, setFileURL] = useState<string>("");
+  const [formInfo, setFormInfo] = useState<TFormInfo>({
+    name: "",
+    description: "",
+    price: "",
+  });
+  const { uploadToIPFS, createNFT } = useContext(NFTContext);
   const { theme } = useTheme();
+  const router = useRouter();
   const onDrop = useCallback(async (acceptedFile: File[]) => {
     // upload image to blockchain ipfs
     const result = await uploadToIPFS(acceptedFile[0]);
-    console.log(result);
     setFileURL(result as any);
   }, []);
   const {
@@ -121,7 +125,10 @@ const CreatedNFT = () => {
           <Button
             buttonName="Create NFT"
             classStyles="py-3 nft-gradient rounded-xl"
-            handleClickOnButton={() => {}}
+            handleClickOnButton={() => {
+              console.log(formInfo);
+              createNFT(formInfo, fileURL, router);
+            }}
           />
         </div>
       </div>
