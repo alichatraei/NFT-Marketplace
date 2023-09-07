@@ -6,6 +6,7 @@ import Link from "next/link";
 import Image from "next/image";
 import images from "@/assets/index";
 import { Button } from "@/components/index";
+import { NFTContext } from "context/NFTContext";
 interface IMenuItemsProps {
   isMobile: boolean;
   activeNav: string;
@@ -58,12 +59,12 @@ const ButtonGroups = ({
   router: NextRouter;
   setActiveNav: React.Dispatch<React.SetStateAction<string>>;
 }) => {
-  const hasConnected = true;
-  return !hasConnected ? (
+  const {currentAccounts , connectWallet} = useContext(NFTContext)
+  return !currentAccounts.length ? (
     <Button
       buttonName="Connect"
       classStyles="mx-2 rounded-xl border border-nft-red-violet text-nft-red-violet bg-transparent"
-      handleClickOnButton={() => {}}
+      handleClickOnButton={connectWallet}
     />
   ) : (
     <Button
