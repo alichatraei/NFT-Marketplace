@@ -126,7 +126,6 @@ const CreatedNFT = () => {
             buttonName="Create NFT"
             classStyles="py-3 nft-gradient rounded-xl"
             handleClickOnButton={() => {
-              console.log(formInfo);
               createNFT(formInfo, fileURL, router);
             }}
           />
